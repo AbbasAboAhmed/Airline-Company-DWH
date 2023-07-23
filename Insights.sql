@@ -1,4 +1,4 @@
--- 1-	Which customers use our services more frequent
+--  Which customers use our services more frequent
 SELECT TOP 20
 	FName + ' ' + LName AS Customer_Name
 	,COUNT(r.Reservation_ID) AS Numder_Of_Servicee
@@ -9,7 +9,7 @@ GROUP BY FName + ' ' + LName
 ORDER BY Numder_Of_Servicee DESC;
 
 ---------------------------------------------------------------------------------------------
--- 2-	What are the most popular flight routes/Timings/airports/aircrafts.
+--  What are the most popular flight routes/Timings/airports/aircrafts.
 Alter Table Route
 ADD Route_Name VARCHAR(20);
 
@@ -45,7 +45,7 @@ GROUP BY a.Model
 ORDER BY Number_Of_Models DESC;
 
 ----------------------------------------------------------------------------------
--- 4-	Which customers contribute the most to our revenue.
+--  Which customers contribute the most to our revenue. 
 SELECT TOP 10
 	FName + ' ' + LName AS Customer_Name
 	,SUM(r.Price_) AS Revenue
@@ -54,12 +54,9 @@ FROM Customer c, Reservations_ r
 WHERE c.Customer_ID = r.Customer_ID
 GROUP BY FName + ' ' + LName
 ORDER BY Revenue DESC;
-------------------------------------------------------------------------------------
--- 5- What are the main sources of revenue for the company
-
 
 --------------------------------------------------------------------------------------
--- 7- Which customer rank (gold, platinum, titanium) are most profitable to us.
+--  Which customer rank (gold, platinum, titanium) are most profitable to us.
 SELECT TOP 10
 	Status
 	,SUM(r.Price_) AS Revenue
@@ -71,7 +68,7 @@ GROUP BY Status
 ORDER BY Revenue DESC;
 
 -----------------------------------------------------------------------------------------------
--- 8-	Which booking channel is most rewarding.
+-- Which booking channel is most rewarding.
 --      Which booking channel-PAYMENT/FARE BASIS is most rewarding/popular.
 
 SELECT        -- Which booking channel is most rewarding
@@ -130,7 +127,7 @@ where fc.FBC_ID = r.FBC_ID
 GROUP BY fc.Name
 ORDER BY Number_Of_FARE_BASIS DESC; 
 -----------------------------------------------
--- 9-	What are the aspects that we need to improve to achieve better customer satisfaction.
+--  What are the aspects that we need to improve to achieve better customer satisfaction.
 SELECT TOP 5
 	pm.Name payment
 	,COUNT(*) FREQ
@@ -170,7 +167,7 @@ WHERE cs.ACTION_ID = a.ACTION_ID
 GROUP BY c.FName + ' ' + c.LNname + ' - ' + c.Position
 ORDER BY FREQ DESC;
 -----------------------------------------------
--- 10-	Which flights receive the best/worst customer feedback.
+-- Which flights receive the best/worst customer feedback.
 SELECT top 1 --best
 	FLIGHT_ID
 	,COUNT(*)  FEEDBACK
@@ -191,7 +188,7 @@ AND A.TYPE = 'Complaint'
 GROUP BY FLIGHT_ID 
 ORDER BY COUNT(*) DESC;
 -----------------------------------------------------
--- 11-	Which crew members are most successful/lovable.
+--  Which crew members are most successful/lovable.
 select TOP 5
 	m.FName + ' ' + m.LNname  Member
 	,COUNT(*) FREQUENCY
@@ -201,8 +198,8 @@ WHERE F.Captain_ID = M.Member_ID
 GROUP BY m.FName + ' ' + m.LNname 
 ORDER BY COUNT(*) DESC;
 ---------------------------------------------
--- 14-	How do customer demographics, such as age or income level, impact travel behavior and preferences.
--- How do customer age  impact travel behavior and preferences
+-- How do customer demographics, such as age or income level, impact travel behavior and preferences.
+	-- How do customer age  impact travel behavior and preferences
 CREATE VIEW Age AS 
 (
 SELECT CASE
@@ -233,17 +230,3 @@ FROM Age
 GROUP BY AGE , CHANNEL
 ORDER BY AGE, CHANNEL, FREQUENCY DESC;
 
-
-
-
-SELECT *
-FROM Age
-
-SELECT *
-FROM [dbo].[Action]
-
-SELECT *
-FROM  Crew_Member
-
-SELECT *
-FROM  Flight f
